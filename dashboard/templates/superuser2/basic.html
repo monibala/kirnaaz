@@ -1,0 +1,440 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en" data-theme="light">
+
+{% load static %}
+{% load custumfilter %}
+{% with ''|getAbout as aboutdata %}
+<!-- Mirrored from netgon.ru/themeforest/arion_html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Feb 2022 11:28:53 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> {{aboutdata.AdminTitle}} | {{title|title}}
+    </title>
+    {% block exstyle %}{%  endblock %}
+    <meta name="description" content="Arion — This is the best dashboard" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Arion — This is the best dashboard" />
+    <meta name="apple-mobile-web-app-title" content="Arion Admin Dashboard" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href=" {% static 'superuser2/css/vendor.min.css' %} " />
+    <link rel="stylesheet" href=" {% static 'superuser2/css/common.css' %} " />
+    <link rel="apple-touch-icon" sizes="57x57" href=" {% static 'superuser2/img/content/favicons/apple-icon-57x57.png' %} " />
+    <link rel="apple-touch-icon" sizes="60x60" href=" {% static 'superuser2/img/content/favicons/apple-icon-60x60.png' %} " />
+    <link rel="apple-touch-icon" sizes="72x72" href=" {% static 'superuser2/img/content/favicons/apple-icon-72x72.png' %} " />
+    <link rel="apple-touch-icon" sizes="76x76" href=" {% static 'superuser2/img/content/favicons/apple-icon-76x76.png' %} " />
+    <link rel="apple-touch-icon" sizes="114x114" href=" {% static 'superuser2/img/content/favicons/apple-icon-114x114.png' %} " />
+    <link rel="apple-touch-icon" sizes="120x120" href=" {% static 'superuser2/img/content/favicons/apple-icon-120x120.png' %} " />
+    <link rel="apple-touch-icon" sizes="144x144" href=" {% static 'superuser2/img/content/favicons/apple-icon-144x144.png' %} " />
+    <link rel="apple-touch-icon" sizes="152x152" href=" {% static 'superuser2/img/content/favicons/apple-icon-152x152.png' %} " />
+    <link rel="apple-touch-icon" sizes="180x180" href=" {% static 'superuser2/img/content/favicons/apple-icon-180x180.png' %} " />
+    <link rel="stylesheet" href=" {% static 'assets/common/css/font-awesome.min.css' %} ">
+    <link rel="stylesheet" href=" {% static 'assets/common/css/themify-icons.css' %} ">
+    <link rel="icon" type="image/png" sizes="192x192" href=" {{aboutdata.favicon.url}} " />
+    <link rel="icon" type="image/png" sizes="32x32" href="  {{aboutdata.favicon.url}} " />
+    <link rel="icon" type="image/png" sizes="96x96" href="  {{aboutdata.favicon.url}} " />
+    <link rel="icon" type="image/png" sizes="16x16" href="  {{aboutdata.favicon.url}} " />
+    <!-- <link rel="manifest" href=" {% static 'superuser2/img/content/favicons/manifest.json' %} " />-->
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="../../ms-icon-144x144.html" />
+    <meta name="theme-color" content="#ffffff" />
+</head>
+<style>
+    .django-ckeditor-widget {
+        width: 100%;
+        padding: 0px 18px 0 18px;
+    }
+    input.checkbox{
+        -webkit-appearance: auto!important;
+    }
+</style>
+<body class="page-home">
+    {% if messages %}
+    <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                {% comment %} <div class="modal-body">
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <h3 class="text-danger">
+                        {% else %}
+                        <h3 class="text-success">
+                            {% endif %}
+                            {{message}}
+                        }
+
+                            
+                        </h3>{% endfor %}
+                </div>
+                {% endcomment %}
+                <div class="modal-body">
+                    <center>
+                        <div class="thank-you-pop">
+                            {% for message in messages %}
+                            {% if message.tags == 'danger' %}
+                            <img src="/static/Red-Cross-Mark-Download-PNG.png" style="height:175px;" alt="">
+                            <h1 class="my-4" 1>Eroor</h1>
+                            <p>{{message|safe}}</p>
+                            {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %} 
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% endif %}
+                            {% else %}
+                            <img src="/static/Green-Round-Tick.png" style="height:175px;" alt="">
+                            <h1 class="my-4" 1>Success</h1>
+                            <p>{{message|safe}}</p>
+                            {% endif %}
+                            </h3>
+
+                            {% endfor %}
+
+
+                        </div>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-{% for message in messages %}{% if message.tags == 'error' %}danger{% else %}success{% endif %}{% endfor %}"
+                        data-dismiss="modal" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="modal modal-compact modal-success scrollbar-thin" id="myModal" data-simplebar>
+        <div class="modal__overlay" data-dismiss="modal"></div>
+        <div class="modal__wrap">
+            <div class="modal__window">
+                <div class="modal__content">
+                    <div class="modal__body">
+                        <div class="modal__container">
+                                {% for message in messages %}
+                                {% if message.tags == 'danger' %}
+                                <img class="modal-success__icon" src="{% static 'superuser2/img/content/checked-failed.svg' %}" alt="#">
+                                <h1 class="my-4" 1>Eroor</h1>
+                                <p>{{message|safe}}</p>
+                                {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %} 
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% endif %}
+                                {% else %}
+                                <img class="modal-success__icon" src="{% static 'superuser2/img/content/checked-success.svg' %}" alt="#">
+                                <h4 class="modal-success__title">Success</h4>
+                                <p>{{message|safe}}</p>
+                                {% endif %}
+                                </h3>
+    
+                                {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-compact__buttons">
+                        <div class="modal-compact__button-item">
+                            <a class="modal-compact__button button" href="{% if modelname and appname %}{% url 'editdatamodel' appname modelname 'newmodel' 'add' %}{% endif %}"><span class="button__text">Add {{modelname|title}}</span>
+                            </a>
+                        </div>
+                        <div class="modal-compact__button-item">
+                            <button class="modal-compact__button button" data-dismiss="modal"><span class="button__text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="button button--primary button--block d-none" data-dismiss="modal" data-modal="#myModal"><span class="button__text">Open Modal</span>
+    </button>
+    {% endif %}
+    {% include 'superuser2/theame-toggle.html' %}
+   
+    <div class="sidebar-backdrop"></div>
+    <div class="page-wrapper">
+        {% include 'superuser2/header.html' with aboutdata=aboutdata %}
+        {% include 'superuser2/sidebar.html' with aboutdata=aboutdata %}
+
+        <main class="page-content {% block main %} page-content--full{% endblock %}">
+            {% block body %}
+            {% endblock %}
+        </main>
+      
+    </div>
+    {% block delete %}
+        {% if appname and modelname  %}
+        <div id="bulkopration" style="display: none;">
+           
+        </div>
+        {% endif %}
+        {% endblock %}
+    <script src=" {% static 'superuser2/js/photoswipe/photoswipe-lightbox.esm.min.js' %} " type="module"></script>
+    <script src=" {% static 'superuser2/js/photoswipe/photoswipe.esm.min.js' %} " type="module"></script>
+    <script src=" {% static 'superuser2/js/gsap/gsap.min.js' %} "></script>
+    <script src=" {% static 'superuser2/js/gsap/ScrollToPlugin.min.js' %} "></script>
+    <script src=" {% static 'superuser2/js/gsap/ScrollTrigger.min.js' %} "></script>
+    <script src=" {% static 'superuser2/js/vendor.min.js' %} "></script>
+    <script src=" {% static 'superuser2/js/common.js' %} "></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap.min.js"></script> -->
+    <script >
+       {% if appname and modelname %}
+       $(document).ready(function() {
+        $('table thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('table thead');
+        var oTable = $('table').DataTable( {
+            orderCellsTop: true,
+            fixedHeader: true,
+            responsive: true,
+            "scrollX": true,
+            // autoWidth : true,
+            select: true,
+            initComplete: function () {
+            var api = this.api();
+ 
+            // For each column
+            api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+ 
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('keyup change', function (e) {
+                            e.stopPropagation();
+ 
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+ 
+                            var cursorPosition = this.selectionStart;
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+ 
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
+            },
+            dom: 'Brtip',
+            select: {
+                style: 'multi',
+                
+            },
+            buttons: [
+            {
+                text: 'Delete selected',
+                action : HandleDelete,
+                className : "btn btn-danger"
+            },
+            {% for data in oprations %}
+            {
+                text:"{{data.0}}",
+                action: {{data.2}},
+                className:"{{data.1}}",
+            },
+            {% endfor %}
+        ]
+        } );
+        oTable.columns.adjust().draw();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+        $('#datatablesearch').keyup(function(){
+            oTable.search($(this).val()).draw() ;
+        })
+        var pagelen = $('#datatableselect')
+        pagelen.parent()>$('a.dropdown-menu__item').on('click',function(){
+            console.log("select change",$(this).val())
+            oTable.page.len( pagelen.val() ).draw();
+        })
+        // $('a.dropdown-menu__item').on('click',function(){
+        //     console.log('wofing')
+        // })
+        // oTable.page.len(20).draw()
+        function getSelecteddata(){
+            var data = $('table tbody').children('tr.selected')
+            var pos = oTable.row(this).index();
+            var row = oTable.row(pos).data();
+            if(data.length==0){
+                alert("Select some records")
+                return ""
+            }else{
+                var selected = ''
+                for (let index = 0; index < data.length; index++) {
+                    const element = data[index];
+                    pos = oTable.row(element).index();
+                    var row = oTable.row(pos).data();
+                    if (index == data.length-1){selected+=row[0]}else{selected+=row[0]+','}
+                }
+                return selected
+            }
+        }
+
+        {% for data in oprations %}
+        {% if not data.4 %}
+        function {{data.2}}(){
+            var selected = getSelecteddata()
+            if (selected != ""){ 
+                $("#bulkopration").html('')
+                $("#bulkopration").html(`<form id="{{data.2}}Form" method="post" action="{{data.3}}?next={{request.get_full_path}}">
+                {% csrf_token %}
+                <input type="text" name="{{data.2}}input" id="{{data.2}}id">
+                </form>`)
+                $("#{{data.2}}id").val(selected)
+                $("#{{data.2}}Form").submit()
+            }
+          
+        }
+        {% else %}
+        function {{data.2}}(){
+            window.location.href = "{{data.3}}?next={{request.get_full_path}}";
+        }
+        {% endif %}
+        {% endfor %}
+
+        function HandleDelete() {
+        
+            var selected = getSelecteddata()
+            
+           if (selected != ""){ 
+            $("#bulkopration").html('')
+            $("#bulkopration").html(` <form id="multideleteForm" method="post" action="{% url 'editdatamodel' appname modelname 'multidelete' 'delete' %}">
+                {% csrf_token %}
+                <input type="text" name="delete" id="deletevalues">
+            </form>`)
+            $("input#deletevalues").val(selected)
+            $("#multideleteForm").submit()
+        }
+
+    }
+    
+} );
+
+{% endif %}
+   
+    </script>
+   <script type="text/javascript">
+    $(window).on('load', function () {
+        // $('#myModal').modal('show');
+        $("button[data-modal='#myModal']").click()
+    });
+    </script>
+    <script>
+        let mode = localStorage.getItem('darkmode')
+        if (mode){$('html').attr('data-theme',mode)}
+        if (mode=='dark'){$('#darkmodetoggle').addClass('is-active')}
+        $('#darkmodetoggle').on('click',function(){
+            if($(this).hasClass("is-active")){
+                $('html').attr('data-theme','dark')
+                localStorage.setItem('darkmode','dark')
+            }else{
+                $('html').attr('data-theme','light')
+                localStorage.setItem('darkmode','light')
+
+            }
+        })
+    </script>
+    {% block script %}
+    <script>
+        var ele = document.getElementsByTagName('input')
+        var ele2 = document.getElementsByTagName('textarea')
+
+        // for (var i = 0; i < ele.length; i++) {
+        //     if (ele[i].className == '' && ele[i].getAttribute('type') != 'checkbox') {
+        //         ele[i].setAttribute('class', 'form-control col')
+        //     }
+        //     if (ele[i].className == 'self.fields[f.name].') {
+        //         ele[i].setAttribute('type', 'time')
+        //     }
+        // }
+        for (var i = 0; i < ele2.length; i++) {
+            if (ele2[i].className == '' && ele2[i].getAttribute('type') != 'checkbox') {
+                ele2[i].setAttribute('class', 'form-control input col')
+                ele2[i].parentElement.setAttribute('class', 'col-md-12 ')
+            }
+            if (ele2[i].className == 'vTimeField') {
+                ele2[i].setAttribute('type', 'time')
+            }
+           
+        }
+        var sel = document.getElementsByTagName('select')
+        for (var i = 0; i < sel.length; i++) {
+            if (sel[i].className=='') {
+            sel[i].setAttribute('class', 'input js-input-tags ')
+            sel[i].setAttribute('searchable', 'Search here..')
+            sel[i].parentElement.setAttribute('class', 'col-md-6')
+            }
+        }
+        var ele = document.getElementsByTagName('input')
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].className == '' && ele[i].getAttribute('type') != 'checkbox' && ele[i].getAttribute('type') != 'hidden') {
+                ele[i].setAttribute('class', 'form-control input ')
+                ele[i].parentElement.setAttribute('class', 'col-md-6')
+            }
+            if (ele[i].className == '' && ele[i].getAttribute('type') == 'checkbox') {
+                ele[i].setAttribute('class', 'checkbox')
+                ele[i].parentElement.setAttribute('class', 'col-md-6')
+            }
+            if (ele[i].className == 'vTimeField') {
+                ele[i].setAttribute('type', 'time')
+                ele[i].parentElement.setAttribute('class', 'col-md-6')
+            }
+            if (ele[i].className == 'vDateField') {
+                ele[i].setAttribute('type', 'date')
+                ele[i].setAttribute('class', 'form-control')
+                ele[i].parentElement.setAttribute('class', 'col-md-6')
+            }
+            if (ele[i].className == 'vDateTime') {
+                ele[i].setAttribute('value', ele[i].value.replace(" ","T"))
+                ele[i].setAttribute('type', 'datetime-local')
+                ele[i].setAttribute('class', 'form-control')
+                ele[i].parentElement.setAttribute('class', 'col-md-6')
+            }
+        }
+      
+    </script>
+    {% endblock%}
+</body>
+
+
+<!-- Mirrored from netgon.ru/themeforest/arion_html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Feb 2022 11:29:58 GMT -->
+{% endwith %}
+</html>

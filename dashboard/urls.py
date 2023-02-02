@@ -1,0 +1,30 @@
+from django.urls import path,include
+from . import views,otherNavViews
+urlpatterns = [
+    path('', views.index, name="dindex"),
+    path('registrations/', views.registration, name="dregistration"),
+    path('registrations/contact', views.contact, name="drcontact"),
+    path('registrations/contact/delcontacts', views.delcontacts, name="delcontacts"),
+    path('registrationsdelete/', views.deleteregistration, name="dsdeleteregistration"),
+    path('registrations/<slug:slug>/', views.registration, name="dsregistration"),
+    path('registrations/edit/<slug:slug1>/<slug:slug2>/', views.editregistration, name="dseditregistration"),
+    # path('othernavs', otherNavViews.othernavs, name="dothernavs"),
+    path('othernavsdelete/', otherNavViews.deleteothernavs, name="dsdeleteothernavs"),
+    # path('othernavs/<slug:slug>', otherNavViews.othernavs, name="dsothernavs"),
+    path('othernavs/contact', otherNavViews.contact, name="orcontact"),
+    path('othernavs/contact/delcontacts', otherNavViews.delcontacts, name="odelcontacts"),
+    path('othernavs/edit/<slug:slug1>/<slug:slug2>/', otherNavViews.editothernavs, name="dseditothernavs"),
+    path('users/', views.alluser, name="alluser"),
+    path('adminchat/', views.adminchat, name="adminchat"),
+    path('adminchat/<slug:slug1>/<int:id>/', views.adminchat, name="adminchatuser"),
+    path('adminchat/<slug:slug1>/<int:id>/clearchat/', views.clearchat, name="clearchat"),
+    path('adminchat/<slug:slug1>/<int:id>/setpayment/', views.setpayment, name="setpayment"),
+    path('getmsg/<slug:slug1>/<int:id>/', views.getmsg, name="admingetmsg"),
+
+    path('dashboardlogout/', views.dashboardlogout, name="dashboardlogout"),
+    path('edithome/', views.edithome, name="edithome"),
+    path('edithome/<slug:slug>/', views.edithome, name="edithomeslug"),
+    path('deletehome/<slug:slug>/', views.deletehome, name="deletehomeslug"),
+    path('viewicon/', views.viewicon, name="viewiconslug"),
+    path('', include('dashboard.superuserurls')),    
+]

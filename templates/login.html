@@ -1,0 +1,55 @@
+{% extends 'basic.html' %}
+<style>
+  p{    font-size: 15px!important;}
+</style>
+<div class="expert-bg">
+      <div class="container">
+        <div class="form_align">
+          <div class="login-form">
+            <div class="panel">
+              <img src="https://www.caonweb.com/expert-images/login-logo.png">
+              <h2>EXPERT LOGIN HERE</h2>
+              <input type="hidden" name="login_error">
+              <div class="print-error-msg error-st1" style="display:none;">
+              </div>
+
+            </div>
+            <form role="form" name="form-login" method="post">
+
+              <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="Enter Your Email Id" required="">
+
+                <div class="print-error-msg error-st1" style="display:none;">
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <input type="password" name="password1" class="form-control" placeholder="Enter Password" required="">
+                <div class="print-error-msg error-st1" style="display:none;">
+                </div>
+              </div>
+
+
+              <button type="submit" class="btn btn-primary" id="login">Login</button>
+
+              <hr>
+              <div class="text-muted1">
+                <p>Don't have an account? <a href="signup.html"> Sign Up
+                    Here</a></p>
+              </div>
+
+              <div class="text-muted1">
+                <p>Forgot password? <a href="#"> Reset Password
+                    Here</a></p>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+ {% endblock %}

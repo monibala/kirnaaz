@@ -1,0 +1,27 @@
+{% extends 'superuser2/basic.html' %}
+{% block body %}
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-header__title">{{appname|title}}</h1>
+    </div>
+    <div class="table-wrapper">
+        <div class="table-wrapper__content table-products table-collapse scrollbar-thin scrollbar-visible"
+            data-simplebar>
+            {% for data in models %}
+            <div class="files-upload">
+                <div class="files-upload__drop">
+                    <div class="files-upload__drop-text">
+                       <a href="{% url "showdatamodel" appname data %}">
+                        <div class="text-dark-theme">{{data}} </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+     
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,391 @@
+{% load static %}
+{% load customfilter %}
+{% with ""|contact as contact %}
+{% with contact.0 as contact %}
+<style>
+.conleft{
+	margin-left:26%;
+}
+@media (max-width: 300px) {
+    .conleft {
+        margin-left:0;
+    }
+}
+
+</style>
+<style>
+
+   li {
+    font-size: 14px!important;
+  } 
+  ul span li a{
+    font-size: 15px!important;
+  } 
+
+</style>
+<header class="shadow-lg p-3 	bg-white rounded">
+      <div class="top-nav">
+        <div class="call">Mail Us : <a href="mailto:{{contact.email}}" class="text-light"> {{contact.email}}</a> </div>
+        <div class="call">Contact: <a href="tel:+{{contact.phone}}" class="text-light">+{{contact.phone}}</a> 
+		</div>{% endwith %}{% endwith %}
+        <div class="right">
+          <ul>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}" style="--color:#71d109">Profile</a></li>
+            <li><a href="{% url 'logout' %}" style="--color:#f0ad4e">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'memberlogin' %}" style="--color:#f0ad4e">Login</a></li>
+            <li><a href="{% url 'membersignup' %}" style="--color:#71d109">Signup</a></li>{% endif %}
+            <li><a href="#" style="--color:#4cae4c" onclick="show()">Chat Now</a></li>
+            <li><a href="{% url "payment" %}" style="--color:#01b4f1">Payment</a></li>
+			
+            <li><a href="{% url 'contact' %}" style="--color:#f0ad4e"">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav-bar">
+        <div class="logo">
+			<a href="/">
+          <img src="{% static 'images/logo.jpeg' %}" alt=""></a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a>
+            </li>
+            </li>
+            <li><a href="{% url 'about' %}">About Us</a>
+            </li>
+            <li><a href="#">Registration</a>
+              <ul class="xl-sub-menu  p-3 conleft container" >
+                <div class="row ">
+                
+                {% for reg in Registrations %}
+                  <div class="col-md-4">
+                    <span class="xl-sub-menu-title">{{reg.title|title}}</span>
+                    {% for drop in reg.RegistrationSubMenu.all %}
+					{% if 5 > forloop.counter %}
+                    <li> <a href="/registration/{{reg.slug}}/{{drop.slug}}">{{drop.submenu}}</a></li> {% endif %}{% endfor %}
+                    {% comment %} <li><a href="pvt-ltd-reg.html">Private Limited Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">LLP(Limited Liability Partnership)</a></li>
+                    <li><a href="pvt-ltd-reg.html">Public Limited Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Producer Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Partnership Firm</a></li>
+                    <li><a href="pvt-ltd-reg.html">Sole Proprietorship</a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration </a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration In USA</a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration In UK</a></li> {% endcomment %}
+                  </div>
+                  {% endfor %}
+				  
+                  {% comment %} <div class="col-lg-3">
+                    <span class="xl-sub-menu-title">Companies Registration</span>
+                    <li><a href="pvt-ltd-reg.html">OPC Pvt Ltd Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Private Limited Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">LLP(Limited Liability Partnership)</a></li>
+                    <li><a href="pvt-ltd-reg.html">Public Limited Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Producer Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Partnership Firm</a></li>
+                    <li><a href="pvt-ltd-reg.html">Sole Proprietorship</a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration </a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration In USA</a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration In UK</a></li>
+                  </div>
+                  <div class="col-lg-3">
+                    <span class="xl-sub-menu-title">Companies Registration</span>
+                    <li><a href="pvt-ltd-reg.html">OPC Pvt Ltd Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Private Limited Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">LLP(Limited Liability Partnership)</a></li>
+                    <li><a href="pvt-ltd-reg.html">Public Limited Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Producer Company</a></li>
+                    <li><a href="pvt-ltd-reg.html">Partnership Firm</a></li>
+                    <li><a href="pvt-ltd-reg.html">Sole Proprietorship</a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration </a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration In USA</a></li>
+                    <li><a href="pvt-ltd-reg.html">Company Registration In UK</a></li>
+                  </div>
+                </div> {% endcomment %}
+				<div class="col-12 text-center">
+                                    <a href="{% url 'services' %}" class="load-more-btn text-center">View More</a>
+                                </div>
+              </ul>
+            </li>
+			         
+            {% for data in othernavreg %}
+            <li ><a href="#">{{data.title}}</a>
+              <ul class="drop-down ">
+              {% for tax in data.RegistrationSubMenu.all %}
+					{% if 5 > forloop.counter %}
+                <li><a href="{% url 'handlenav' slug1=data.slug slug2=tax.slug %}">{{tax.submenu}}</a></li>{% endif %}{% endfor %}
+                {% comment %} <li><a href="#">Business xTax Return Filling</a></li>
+                <li><a href="#">TDS Return Filling</a></li>
+                <li><a href="{% url 'pvtltdreg' %}">Income Tax Return</a></li> {% endcomment %}
+                <!-- <li><a href="#">GST Return Filling</a></li>
+                <li><a href="#">ESI Return Filling</a></li> -->
+				<div class="col-12 text-center">
+                                    <a href="{% url 'services' %}" class="load-more-btn text-center">View More</a>
+                                </div>
+              </ul>
+            </li>
+            {% endfor %}
+			 <li ><a href="#">Resourses</a>
+              <ul class="drop-down" style='min-width:150px' >
+			  {% for data in choices %}
+			 	 <li style=""><a href="{% url 'blog' data.1 %}">{{data.1}}</a>
+				{% endfor %}	  
+			  </ul>
+			  </li>
+            {% comment %} <li style=""><a href="{% url 'news' %}">News</a>
+            <li style=""><a href="{% url 'blog' %}">blog</a>
+             {% endcomment %}
+          </ul>
+        </nav>
+        <div class="toggle-menu">
+          <div class="fa fa-bars"></div>
+        </div>
+        <div class="bottom-nav">
+          <div class="right">
+            <ul>
+				{% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}" style="--color:#71d109">Profile</a></li>
+            <li><a href="{% url 'logout' %}" style="--color:#f0ad4e">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'memberlogin' %}" style="--color:#f0ad4e">Login</a></li>
+            <li><a href="{% url 'membersignup' %}" style="--color:#71d109">Signup</a></li>{% endif %}
+              <li><a href="#" style="--color:#4cae4c" onclick="show()">Chat Now</a></li>
+              <li><a href="{% url "payment" %}" style="--color:#01b4f1">Payment</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+      {% if messages %}
+
+{% for message in messages %}
+<!-- Modal HTML -->
+
+{% if message.tags == "error" %}
+ <style>
+    body {
+		font-family: 'Varela Round', sans-serif;
+	}
+	.modal-confirm {		
+		color: #636363;
+		width: 400px;
+		margin: 30px auto;
+	}
+	.modal-confirm .modal-content {
+		padding: 20px;
+		border-radius: 5px;
+		border: none;
+        text-align: center;
+		font-size: 14px;
+	}
+	.modal-confirm .modal-header {
+		border-bottom: none;   
+        position: relative;
+	}
+	.modal-confirm h4 {
+		text-align: center;
+		font-size: 26px;
+		margin: 30px 0 -10px;
+	}
+	.modal-confirm .close {
+        position: absolute;
+		top: -5px;
+		right: -2px;
+	}
+	.modal-confirm .modal-body {
+		color: #999;
+	}
+	.modal-confirm .modal-footer {
+		border: none;
+		text-align: center;		
+		border-radius: 5px;
+		font-size: 13px;
+		padding: 10px 15px 25px;
+	}
+	.modal-confirm .modal-footer a {
+		color: #999;
+	}		
+	.modal-confirm .icon-box {
+		width: 80px;
+		height: 80px;
+		margin: 0 auto;
+		border-radius: 50%;
+		z-index: 9;
+		text-align: center;
+		border: 3px solid #f15e5e;
+	}
+	.modal-confirm .icon-box i {
+		color: #f15e5e;
+		font-size: 46px;
+		display: inline-block;
+		margin-top: 13px;
+	}
+    .modal-confirm .btn {
+        color: #fff;
+        border-radius: 4px;
+		background: #60c7c1;
+		text-decoration: none;
+		transition: all 0.4s;
+        line-height: normal;
+		min-width: 120px;
+        border: none;
+		min-height: 40px;
+		border-radius: 3px;
+		margin: 0 5px;
+		outline: none !important;
+    }
+	.modal-confirm .btn-info {
+        background: #c1c1c1;
+    }
+    .modal-confirm .btn-info:hover, .modal-confirm .btn-info:focus {
+        background: #a8a8a8;
+    }
+    .modal-confirm .btn-danger {
+        background: #f15e5e;
+    }
+    .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+        background: #ee3535;
+    }
+	.trigger-btn {
+		display: inline-block;
+		margin: 100px auto;
+	}
+</style>
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="icon-box">
+					<i class="material-icons">&#xE5CD;</i>
+				</div>
+			</div>
+				<h4 class="modal-title">Error</h4>	
+               <center> <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-hidden="true">&times;</button></center>
+			<div class="modal-body">
+				<p>{{message}}</p>
+			</div>
+			<div class="modal-footer" style="display:block">
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-dismiss="modal">ok</button>
+			</div>
+		</div>
+	</div>
+</div>     
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#myModal').modal('show');
+    });
+</script>
+
+
+
+
+{% elif message.tags == "success" %}
+    <style>
+    body {
+		font-family: 'Varela Round', sans-serif;
+	}
+	.modal-confirm {		
+		color: #636363;
+		width: 325px;
+		margin: 30px auto;
+	}
+	.modal-confirm .modal-content {
+		padding: 20px;
+		border-radius: 5px;
+		border: none;
+	}
+	.modal-confirm .modal-header {
+		border-bottom: none;   
+        position: relative;
+	}
+	.modal-confirm h4 {
+		text-align: center;
+		font-size: 26px;
+		margin: 30px 0 -15px;
+	}
+	.modal-confirm .form-control, .modal-confirm .btn {
+		min-height: 40px;
+		border-radius: 3px; 
+	}
+	.modal-confirm .close {
+        position: absolute;
+		top: -5px;
+		right: -5px;
+	}	
+	.modal-confirm .modal-footer {
+		border: none;
+		text-align: center;
+		border-radius: 5px;
+		font-size: 13px;
+	}	
+	.modal-confirm .icon-box {
+		color: #fff;		
+		position: absolute;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		top: -70px;
+		width: 95px;
+		height: 95px;
+		border-radius: 50%;
+		z-index: 9;
+		background: #e77b20;
+		padding: 15px;
+		text-align: center;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+	}
+	.modal-confirm .icon-box i {
+		font-size: 58px;
+		position: relative;
+		top: 3px;
+	}
+	.modal-confirm.modal-dialog {
+		margin-top: 80px;
+	}
+    .modal-confirm .btn {
+        color: #fff;
+        border-radius: 4px;
+		background: #e77b20;
+		text-decoration: none;
+		transition: all 0.4s;
+        line-height: normal;
+        border: none;
+    }
+	.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+		background: #6fb32b;
+		outline: none;
+	}
+	.trigger-btn {
+		display: inline-block;
+		margin: 100px auto;
+	}
+</style>
+
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="icon-box">
+					<i class="material-icons">&#xE876;</i>
+				</div>				
+				<h4 class="modal-title">Awesome!</h4>	
+			</div>
+			<div class="modal-body">
+				<p class="text-center">{{ message }}</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-block" data-bs-dismiss="modal" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+</div>  
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#myModal').modal('show');
+    });
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
